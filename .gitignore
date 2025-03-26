@@ -1,0 +1,58 @@
+### Конфиденциальные данные ###
+# Ключи и сертификаты
+*.key
+*.pem
+*.crt
+*.csr
+*.ovpn
+*.req
+pki/               # Исключаем всю папку PKI (кроме шаблонов)
+!packages/easy-rsa-config/etc/easy-rsa/vars  # Но сохраняем конфиг-шаблон
+
+# Пароли и переменные
+.env
+secrets.txt
+auth.txt
+
+### Системные файлы ###
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+Thumbs.db
+
+### Логи и временные файлы ###
+*.log
+logs/
+/tmp/
+/var/log/
+openvpn-status.log
+
+### Автогенерируемые файлы ###
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+### Бэкапы и артефакты ###
+backups/
+*.backup
+*.old
+
+### Исключения ###
+# Разрешаем собранные DEB-пакеты
+!packages/*.deb
+
+# Разрешаем конфиги-шаблоны
+!configs/server.conf.example
+!configs/client-template.ovpn
+
+### IDE ###
+# JetBrains
+.idea/
+*.iml
+
+# VS Code
+.vscode/
