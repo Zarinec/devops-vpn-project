@@ -1,0 +1,7 @@
+Package: easy-rsa-config
+Version: 1.0
+Architecture: all
+Maintainer: DevOps Team <devops@testcompany.com>
+Depends: easy-rsa (>= 3.0.4), openssl
+Description: Custom Easy-RSA configuration
+ Pre-configured Easy-RSA vars file for PKI setup.

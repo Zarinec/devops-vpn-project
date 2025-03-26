@@ -1,0 +1,6 @@
+set_var EASYRSA_REQ_COUNTRY   "RU"
+set_var EASYRSA_REQ_PROVINCE  "Moscow"
+set_var EASYRSA_REQ_CITY      "Moscow"
+set_var EASYRSA_REQ_ORG       "Test Company"
+set_var EASYRSA_REQ_EMAIL     "admin@testcompany.com"
+set_var EASYRSA_REQ_OU        "IT Department"

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+LOG_FILE="/var/log/easy-rsa-config-install.log"
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting installation" >> "$LOG_FILE"
+
+if [ ! -f /etc/easy-rsa/vars ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: vars file not found" >> "$LOG_FILE"
+    exit 1
+fi
+
+systemctl restart easy-rsa 2>> "$LOG_FILE" || {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] WARNING: Failed to restart easy-rsa service" >> "$LOG_FILE"
+}
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Installation completed" >> "$LOG_FILE"
