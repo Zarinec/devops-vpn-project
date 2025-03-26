@@ -1,0 +1,5 @@
+- name: Run PKI tests
+  run: sudo ./tests/pki-test.sh
+
+- name: Run VPN tests
+  run: sudo ./tests/vpn-test.sh
