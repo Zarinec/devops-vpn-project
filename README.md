@@ -26,26 +26,53 @@
 ```bash
 # Клонирование репозитория
 git clone https://github.com/Zarinec/devops-vpn-project.git
-cd vpn-infra
-
-# Запуск автоматической установки
-sudo ./scripts/deploy.sh
 ```
 
 ## 📂 Структура проекта
 
 ```
+
 .
-├── configs/               # Конфигурационные файлы
-│   ├── server.conf        # OpenVPN
-│   └── prometheus.yml     # Prometheus
-├── docs/                  # Документация
-│   ├── ADMIN_GUIDE.md     # Руководство администратора
-│   ├── USER_GUIDE_RU.md   # Руководство пользователя (RU)
-│   └── images/            # Диаграммы
-├── packages/              # DEB-пакеты
-├── scripts/               # Скрипты развертывания
-└── tests/                 # Интеграционные тесты
+├── configs/                  # Конфигурационные файлы
+│   ├── server.conf           # Конфиг OpenVPN-сервера
+│   ├── client-template.ovpn  # Шаблон для клиентов
+│   └── prometheus.yml        # Настройки мониторинга
+│
+├── docs/                     # Документация
+│   ├── ADMIN_GUIDE.md        # Руководство администратора
+│   ├── USER_GUIDE_RU.md      # Руководство пользователя
+│   ├── INSTALL.md            # Инструкция по установке
+│   └── images/               # Диаграммы и скриншоты
+│       └── vpn-flow.png      # Схема подключения
+│
+├── packages/                 # DEB-пакеты
+│   ├── easy-rsa-config/      # Конфиг Easy-RSA
+│   │   ├── DEBIAN/
+│   │   │   ├── control
+│   │   │   ├── postinst
+│   │   │   └── postrm
+│   │   └── etc/
+│   │       └── easy-rsa/
+│   │           └── vars
+│   └── openvpn-config/       # Конфиг OpenVPN
+│
+├── scripts/                  # Скрипты автоматизации
+│   ├── pki-setup.sh          # Установка PKI
+│   ├── vpn-setup.sh          # Настройка OpenVPN
+│   ├── gen-client-cert.sh    # Генерация клиентских сертификатов
+│   ├── monitoring.sh         # Развёртывание мониторинга
+│   ├── reset-firewall.sh     # Скрипт для сброса правил firewall
+│   ├── revoke-client-cert.sh     # Отзыв клиентского сертификата
+│   ├── backup.sh             # Скрипт бэкапа
+│   └── common.sh             # Общие функции
+│
+├── tests/                   # Тесты
+│   ├── pki-test.sh          # Тесты PKI
+│   └── vpn-test.sh          # Тесты VPN-подключения
+│
+├── .gitignore               # Исключаемые файлы
+└── README.md                # Основная документация проекта
+
 ```
 
 ## 📚 Документация
@@ -83,7 +110,7 @@ http://your-server-ip:9090
 5. Откройте Pull Request
 
 ## ⚠️ Важная информация
-
+i
 - **Не храните** приватные ключи в репозитории!
 - Все пароли должны быть в `.env` (в `.gitignore`)
 - Логи автоматически ротируются в `/var/log/`

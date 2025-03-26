@@ -19,11 +19,24 @@ sudo ./scripts/gen-client-cert.sh ivanov
 - Файл конфигурации: /etc/openvpn/client-configs/ivanov.ovpn
 - Сертификат и ключ в PKI: /etc/easy-rsa/pki/issued/ivanov.crt, /etc/easy-rsa/pki/private/ivanov.key
 
-### Отзыв сертификата
-cd /etc/easy-rsa
-./easyrsa revoke <имя_клиента>
-./easyrsa gen-crl
-sudo systemctl restart openvpn-server@server
+```markdown
+## Отзыв сертификатов
+
+```bash
+# Просмотр выданных сертификатов
+ls /etc/easy-rsa/pki/issued/
+
+# Отзыв сертификата
+sudo ./scripts/revoke-client-cert.sh <имя_клиента>
+
+# Проверка CRL
+openssl crl -in /etc/easy-rsa/pki/crl.pem -text -noout
+```
+Для **автоматического обновления** CRL добавьте в cron:
+   ```bash
+   # Еженедельное обновление CRL
+   0 3 * * 1 /etc/easy-rsa/easyrsa gen-crl
+   ```
 ---
 
 ## Управление сертификатами
