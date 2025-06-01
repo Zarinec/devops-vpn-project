@@ -1,4 +1,3 @@
-```markdown
 # VPN Admin Guide (`devops-vpn-project`)
 
 ## 📌 Quick Access
@@ -95,5 +94,4 @@ tail -f /var/log/vpn-install.log  # Все действия логируются
    ```bash
    cat /etc/openvpn/client-configs/test_user.ovpn | grep "remote"  
 3. Подключитесь через OpenVPN-клиент.
-```
 ```
