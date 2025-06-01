@@ -49,11 +49,11 @@ sudo ./scripts/gen-client-cert.sh ivanov
 # Просмотр выданных сертификатов
 ls /etc/easy-rsa/pki/issued/
 ```
-# 1. Отзыв сертификата
+### 1. Отзыв сертификата
 ```bash
 sudo ./scripts/revoke-client-cert.sh <имя_клиента>
 ```
-# 2. Проверка CRL
+### 2. Проверка CRL
 ```bash
 openssl crl -in /etc/easy-rsa/pki/crl.pem -text -noout
 ```
@@ -200,7 +200,8 @@ curl ifconfig.me
 
 1. **Скрипт для сброса правил** (`scripts/reset-firewall.sh`):
 Для сброса правил используйте [этот скрипт](https://github.com/Zarinec/devops-vpn-project/blob/main/scripts/reset-firewall.sh "reset-firewall.sh")
-2.Автоматический бэкап правил (добавить в cron):
+
+2. Автоматический бэкап правил (добавить в cron):
 ```bash
 0 3 * * * /sbin/iptables-save > /backup/iptables-backup-$(date +\%F).rules
 ```
