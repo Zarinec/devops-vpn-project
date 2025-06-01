@@ -19,7 +19,7 @@ devops-vpn-project/
 
 #### **🔐 Управление пользователями**  
 ### 1. Добавление пользователя  
-Для запуска используйте [этот скрипт](https://github.com/Zarinec/devops-vpn-project/scripts/gen-client-cert.sh).  
+Для запуска используйте [этот скрипт](https://github.com/Zarinec/devops-vpn-project/blob/main/scripts/gen-client-cert.sh).  
 `scripts/gen-client-cert.sh <username>`  
 
 **Пример:**  
