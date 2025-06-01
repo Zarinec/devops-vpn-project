@@ -208,6 +208,8 @@ curl ifconfig.me
 0 3 * * * /sbin/iptables-save > /backup/iptables-backup-$(date +\%F).rules
 ```
 3. Проверка открытых портов:
-bash```
+Для проверки открытых портов, можно использовать команду:
+```bash
 ss -tulnp | grep -E '1194|22'
 ```
+  > !!!Набор портов может отличаться
