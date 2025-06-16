@@ -75,15 +75,36 @@ openssl crl -in /etc/easy-rsa/pki/crl.pem -text -noout
   ```bash 
   cat /etc/easy-rsa/pki/crl.pem | openssl crl -text -noout
   ```  
----
-
-## Мониторинг
+### Логирование
 - Логи OpenVPN: /var/log/openvpn.log
 - Логи генерации сертификатов: /var/log/vpn-install.log
 - Статус подключений:
   ```bash
   sudo cat /var/log/openvpn-status.log
   ```
+---
+
+## Система мониторинга
+
+### Доступ:
+- Prometheus UI: http://10.12.0.220:9090
+- Alertmanager: http://10.12.0.220:9093
+
+### Компоненты:
+- **Node Exporter**: метрики серверов
+- **Blackbox Exporter**: проверка доступности VPN
+- **PKI Monitor**: контроль работы удостоверяющего центра
+
+### Установка:
+```bash
+# На сервере мониторинга
+sudo apt install ./packages/prometheus-config.deb ./packages/node-exporter.deb ./packages/blackbox-exporter.deb
+```
+```bash
+# На VPN-сервере
+sudo apt install ./packages/node-exporter.deb ./packages/openvpn-exporter.deb ./packages/pki-monitor.deb
+```
+
 ---
 
 ## Резервное копирование
