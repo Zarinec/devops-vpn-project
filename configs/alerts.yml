@@ -1,0 +1,26 @@
+groups:
+- name: infrastructure
+  rules:
+  - alert: HighCPU
+    expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High CPU usage on {{ $labels.instance }}"
+
+- alert: VPNDown
+  expr: up{job="blackbox", instance="tcp://10.10.3.82:1194"} == 0
+  for: 2m
+  labels:
+    severity: critical
+  annotations:
+    summary: "VPN-сервер недоступен (порт 1194)"
+
+- alert: PKIServiceDown
+  expr: easy_rsa_status{job="pki_health"} != "active"
+  for: 5m
+  labels:
+    severity: critical
+  annotations:
+    summary: "Сервис Easy-RSA не работает"

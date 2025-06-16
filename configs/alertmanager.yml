@@ -1,0 +1,12 @@
+route:
+  receiver: 'email'
+
+receivers:
+- name: 'email'
+  email_configs:
+  - to: 'admin@example.com'
+    from: 'alertmanager@example.com'
+    smarthost: 'smtp.example.com:587'
+    auth_username: 'user'
+    auth_password: 'password'
+    send_resolved: true

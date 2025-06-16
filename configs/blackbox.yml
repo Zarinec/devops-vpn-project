@@ -1,0 +1,14 @@
+modules:
+  # Основная проверка VPN-порта
+  vpn_port_check:
+    prober: tcp
+    timeout: 3s
+    tcp:
+      preferred_ip_protocol: "ip4"
+
+  # Дополнительная проверка (если нужно)
+  http_prometheus_check:
+    prober: http
+    timeout: 3s
+    http:
+      valid_status_codes: [200]
