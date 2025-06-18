@@ -164,6 +164,9 @@ sudo apt install ./packages/prometheus-config.deb ./packages/node-exporter.deb .
 sudo apt install ./packages/node-exporter.deb ./packages/openvpn-exporter.deb ./packages/pki-monitor.deb
 ```
 
+Проектирование системы мониторинга описно подробнее в документе:
+- [Система мониторинга](docs/monitoring_design.md)
+
 ---
 
 ## Резервное копирование
