@@ -32,8 +32,57 @@
 
 Детальная схема текущей инфраструктуры и потоков данных представлена ниже:
 
-- [Схема инфраструктуры](images/infra_diagram.png)
+- [Схема инфраструктуры](images/Infra_diagram.png)
+```mermaid
+graph TD
+  subgraph "Сервер VPN/PKI 10.10.3.82"
+    VPN[OpenVPN Server] --> PKI[Удостоверяющий центр]
+  end
+
+  subgraph "Сервер мониторинга 10.12.0.220"
+    Prom[Prometheus] --> Grafana[Grafana]
+    Prom --> Alert[Alertmanager]
+  end
+
+  subgraph "Сервер бэкапов  10.11.0.145"
+    Backup[Backup System] --> Storage[(S3/Дисковое хранилище)]
+  end
+
+  VPN -- Метрики --> Prom
+  PKI -- Метрики --> Prom
+  Backup -- Метрики --> Prom
+  VPN -- Бэкап конфигов --> Backup
+  PKI -- Шифрованные ключи --> Backup
+```
 - [Потоки данных](images/protocol_diagram.png)
+
+```mermaid
+sequenceDiagram
+  participant User as Пользователь VPN
+  participant VPN as VPN-сервер (10.10.3.82)
+  participant PKI as PKI (10.10.3.82)
+  participant Backup as Сервер бэкапов (10.11.0.145)
+  participant Prom as Prometheus (10.12.0.220)
+  participant Alert as Alertmanager
+
+  User->>VPN: Подключение (TCP 1194)
+  VPN->>PKI: Проверка сертификата
+  PKI-->>VPN: Подтверждение
+  VPN->>User: Доступ в сеть
+
+  loop Ежедневное бэкапирование
+    VPN->>Backup: Конфиги + логи (rsync)
+    PKI->>Backup: Шифрованные ключи (scp)
+  end
+
+  loop Мониторинг
+    VPN->>Prom: Метрики OpenVPN
+    PKI->>Prom: Метрики Easy-RSA
+    Backup->>Prom: Статус бэкапов
+    Prom->>Alert: Алерты
+    Alert-->>Admin: Email/SMS
+  end
+```
 
 ## Генерация пользовательских сертификатов
 
