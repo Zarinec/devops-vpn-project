@@ -108,6 +108,8 @@ sudo apt install ./packages/node-exporter.deb ./packages/openvpn-exporter.deb ./
 ---
 
 ## Резервное копирование
+Подробное описание системы бэкапов и процедур восстановления: [Руководство СРК](./BACKUP_GUIDE.md)
+
 Критичные данные для резервирования:
 /etc/easy-rsa/pki/
 /etc/openvpn/
