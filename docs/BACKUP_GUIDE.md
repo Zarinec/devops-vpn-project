@@ -31,4 +31,16 @@ tar -xzf /opt/backups/weekly/backup_2023-11-20.tar.gz -C /restore/path
 tar -tf /opt/backups/daily/backup_2023-11-25.tar.gz
 ```
 > Подставьте имя согласно необходимой дате бэкапа!
-
+## 4. Архитектура СРК
+Первоначальная схема архитектуры СРК представлена ниже:
+> **Важно!**
+> Схема будет дополняться и меняться в зависимости от изменений компании.
+```mermaid
+graph TD
+  A[Основной сервер\n10.10.3.82] -->|rsync\nежедневно| B[Сервер бэкапов\n10.11.0.145]
+  B -->|Node Exporter| C[Prometheus\n10.12.0.220]
+  C -->|Алерты| D[Alertmanager]
+  D -->|Email/SMS| E[Администратор]
+  style A fill:#f9f,stroke:#333
+  style B fill:#bbf,stroke:#333
+```
