@@ -1,6 +1,3 @@
-Вот дополненный файл `INSTALL.md` с разделом по установке системы мониторинга, интегрированный с существующей структурой:
-
-```markdown
 # Установка VPN-инфраструктуры и мониторинга
 
 ## Требования
@@ -8,13 +5,13 @@
 - **ОС**: Ubuntu 22.04 LTS
 - **Доступ**: SSH с правами sudo
 
-### VPN/PKI Сервер (10.10.3.82)
+### VPN/PKI Сервер 
 - **Ресурсы**: 2 ГБ RAM, 10 ГБ дискового пространства
 - **Порты**: 
   - 1194/UDP (OpenVPN)
   - 9176/TCP (OpenVPN Exporter)
 
-### Сервер мониторинга (10.12.0.220)
+### Сервер мониторинга
 - **Ресурсы**: 4 ГБ RAM, 20 ГБ дискового пространства
 - **Порты**:
   - 9090/TCP (Prometheus)
@@ -25,7 +22,7 @@
 
 ## 1. Установка VPN и PKI
 ```bash
-# На сервере 10.10.3.82:
+# На основном сервере :
 git clone https://github.com/Zarinec/devops-vpn-project.git
 cd devops-vpn-project
 
@@ -42,7 +39,7 @@ sudo dpkg -i packages/easy-rsa-config.deb
 ---
 
 ## 2. Установка системы мониторинга
-### На сервере 10.12.0.220:
+### На сервере мониторинга:
 ```bash
 # Установка пакетов мониторинга
 sudo dpkg -i packages/prometheus-config.deb 
@@ -53,7 +50,7 @@ sudo dpkg -i packages/blackbox-exporter.deb
 sudo systemctl enable --now prometheus node-exporter blackbox-exporter
 ```
 
-### Настройка мониторинга VPN (на 10.10.3.82):
+### Настройка мониторинга VPN:
 ```bash
 sudo dpkg -i packages/openvpn-exporter.deb
 sudo systemctl enable --now openvpn-exporter
@@ -94,4 +91,3 @@ sudo systemctl enable --now grafana-server
 ---
 
 > Полная документация по мониторингу: [MONITORING_GUIDE.md](docs/MONITORING_GUIDE.md)
-```
